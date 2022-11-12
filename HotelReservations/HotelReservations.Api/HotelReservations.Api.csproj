@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HotelReservations.Core\HotelReservations.Core.csproj" />
+    <ProjectReference Include="..\HotelReservations.Query\HotelReservations.Query.csproj" />
+  </ItemGroup>
+
 </Project>
