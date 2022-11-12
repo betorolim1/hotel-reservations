@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelReservations.Api", "HotelReservations.Api\HotelReservations.Api.csproj", "{1A70606B-AC4B-4951-A387-9C2D5C4EBBAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelReservations.Core", "HotelReservations.Core\HotelReservations.Core.csproj", "{A7B88CD8-F8AF-4374-9FF2-E8033ED154FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelReservations.Core", "HotelReservations.Core\HotelReservations.Core.csproj", "{A7B88CD8-F8AF-4374-9FF2-E8033ED154FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelReservations.Query", "HotelReservations.Query\HotelReservations.Query.csproj", "{0E467709-484F-4916-B16A-21874D462F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelReservations.Query", "HotelReservations.Query\HotelReservations.Query.csproj", "{0E467709-484F-4916-B16A-21874D462F43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelReservations.Data", "HotelReservations.Data\HotelReservations.Data.csproj", "{DAE3C4D2-085B-44FA-9B8E-4B6DD095DED3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelReservations.Data", "HotelReservations.Data\HotelReservations.Data.csproj", "{DAE3C4D2-085B-44FA-9B8E-4B6DD095DED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelReservations.Test", "HotelReservations.Test\HotelReservations.Test.csproj", "{E624AD7B-AC76-4136-95C2-D2953806867F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelReservations.Test", "HotelReservations.Test\HotelReservations.Test.csproj", "{E624AD7B-AC76-4136-95C2-D2953806867F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelReservations.Model", "HotelReservations.Model\HotelReservations.Model.csproj", "{EAEC137C-B7A6-4C41-9956-4AB9F937605C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E624AD7B-AC76-4136-95C2-D2953806867F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E624AD7B-AC76-4136-95C2-D2953806867F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E624AD7B-AC76-4136-95C2-D2953806867F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAEC137C-B7A6-4C41-9956-4AB9F937605C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAEC137C-B7A6-4C41-9956-4AB9F937605C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAEC137C-B7A6-4C41-9956-4AB9F937605C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAEC137C-B7A6-4C41-9956-4AB9F937605C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

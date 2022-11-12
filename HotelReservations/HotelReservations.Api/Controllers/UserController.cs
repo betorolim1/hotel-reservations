@@ -19,6 +19,14 @@ namespace HotelReservations.Api.Controllers
             _userHandler = userHandler;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUsersAsync()
+        {
+            var result = await _userQueryHandler.GetUsersAsync();
+
+            return Ok(result);
+        }
+
         [HttpGet("{userId}/reservations")]
         public async Task<IActionResult> GetUserReservationsAsync([FromQuery] Guid userId)
         {

@@ -4,4 +4,17 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HotelReservations.Model\HotelReservations.Model.csproj" />
+    <ProjectReference Include="..\HotelReservations.Query\HotelReservations.Query.csproj" />
+  </ItemGroup>
+
 </Project>
