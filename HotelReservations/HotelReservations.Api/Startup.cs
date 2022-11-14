@@ -67,7 +67,7 @@ namespace HotelReservations.Api
             {
                 var user = new User
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("5d1997b5-c774-42bc-b823-a4b60b21098b"),
                     Name = "User for testing"
                 };
 

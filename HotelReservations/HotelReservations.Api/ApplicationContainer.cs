@@ -1,6 +1,9 @@
 ﻿using HotelReservations.Core.Handlers;
 using HotelReservations.Core.Handlers.Interfaces;
+using HotelReservations.Core.Reservations.Repository;
+using HotelReservations.Core.Users.Repository;
 using HotelReservations.Data.Dao;
+using HotelReservations.Data.Repository;
 using HotelReservations.Query.Handlers;
 using HotelReservations.Query.Handlers.Interfaces;
 using HotelReservations.Query.Users.Dao;
@@ -15,6 +18,13 @@ namespace HotelReservations.Api
             AddHandlers(service);
             AddQueryHandlers(service);
             AddDaos(service);
+            AddRepositories(service);
+        }
+
+        private static void AddRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         private static void AddQueryHandlers(IServiceCollection services)

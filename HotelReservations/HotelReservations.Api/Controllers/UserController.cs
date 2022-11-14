@@ -50,7 +50,7 @@ namespace HotelReservations.Api.Controllers
         }
 
         [HttpPost("{userId}/reservations")]
-        public async Task<IActionResult> CreateReservationAsync([FromQuery] Guid userId, [FromBody] CreateReservationCommand command)
+        public async Task<IActionResult> CreateReservationAsync(Guid userId, [FromBody] CreateReservationCommand command)
         {
             if (command is null)
                 return BadRequest("Command can not be null");
@@ -58,6 +58,9 @@ namespace HotelReservations.Api.Controllers
             command.UserId = userId;
 
             var result = await _userHandler.CreateReservationAsync(command);
+
+            if (!_userHandler.IsValid)
+                return BadRequest(_userHandler.Notifications);
 
             return Ok(result);
         }

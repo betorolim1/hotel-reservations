@@ -10,5 +10,6 @@ namespace HotelReservations.Data.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

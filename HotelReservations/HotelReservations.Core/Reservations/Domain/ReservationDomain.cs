@@ -3,11 +3,11 @@ using System;
 
 namespace HotelReservations.Core.Reservations.Domain
 {
-    public class Reservation : Notifiable
+    public class ReservationDomain : Notifiable
     {
         private int MAX_STRING_LENGTH = 255;
 
-        private Reservation(Guid userId, DateTime startDate, DateTime endDate, string observation)
+        private ReservationDomain(Guid userId, DateTime startDate, DateTime endDate, string observation)
         {
             UserId = userId;
             StartDate = startDate;
@@ -34,13 +34,13 @@ namespace HotelReservations.Core.Reservations.Domain
 
         private void ValidateMainFields()
         {
-            if (StartDate < DateTime.Now)
+            if (StartDate.Date < DateTime.Now.Date)
                 AddNotification("Invalid StartDate");
             
-            if (StartDate == DateTime.Now)
+            if (StartDate.Date == DateTime.Now.Date)
                 AddNotification("Stay can't start today");
 
-            if(EndDate < StartDate)
+            if(EndDate.Date < StartDate.Date)
                 AddNotification("Invalid dates");
 
             if(IsValidRangeDate())
@@ -55,22 +55,22 @@ namespace HotelReservations.Core.Reservations.Domain
 
         private bool IsValidRangeDate()
         {
-            var totalRange = EndDate - StartDate;
+            var totalRange = EndDate.Date - StartDate.Date;
 
             return totalRange.Days > 3;
         }
 
         private bool IsValidStartDateFromToday()
         {
-            var totalRange = StartDate - DateTime.Now;
+            var totalRange = StartDate.Date - DateTime.Now.Date;
 
             return totalRange.Days > 30;
         }
 
         public static class Factory
         {
-            public static Reservation CreateReservationToInsert(Guid userId, DateTime startDate, DateTime endDate, string observation)
-                => new Reservation(userId, startDate, endDate, observation);
+            public static ReservationDomain CreateReservationToInsert(Guid userId, DateTime startDate, DateTime endDate, string observation)
+                => new ReservationDomain(userId, startDate, endDate, observation);
         }
     }
 }
