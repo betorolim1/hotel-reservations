@@ -6,6 +6,7 @@ using HotelReservations.Data.Dao;
 using HotelReservations.Data.Repository;
 using HotelReservations.Query.Handlers;
 using HotelReservations.Query.Handlers.Interfaces;
+using HotelReservations.Query.Reservations.Dao;
 using HotelReservations.Query.Users.Dao;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -41,6 +42,7 @@ namespace HotelReservations.Api
         private static void AddDaos(IServiceCollection services)
         {
             services.AddScoped<IUserDao, UserDao>();
+            services.AddScoped<IReservationDao, ReservationDao>();
         }
     }
 }

@@ -28,7 +28,8 @@ namespace HotelReservations.Data.Repository
                 EndDate = reservation.EndDate.Date,
                 Observation = reservation.Observation,
                 StartDate = reservation.StartDate.Date,
-                Id = reservationId
+                Id = reservationId,
+                UserId = user.Id
             };
 
             await _databaseContext.AddAsync(reservationToInsert);

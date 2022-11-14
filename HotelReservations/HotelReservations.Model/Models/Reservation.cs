@@ -10,7 +10,7 @@ namespace HotelReservations.Model.Models
         public DateTime EndDate { get; set; }
         public string Observation { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
 
         public virtual User User { get; set; }
     }

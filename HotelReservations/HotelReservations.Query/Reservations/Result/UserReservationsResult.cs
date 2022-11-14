@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotelReservations.Query.Users.Result
+namespace HotelReservations.Query.Reservations.Result
 {
     public class UserReservationsResult
     {
@@ -8,5 +8,7 @@ namespace HotelReservations.Query.Users.Result
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Observation { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
     }
 }

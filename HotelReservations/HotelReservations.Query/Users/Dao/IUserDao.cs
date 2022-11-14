@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using HotelReservations.Model.Models;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelReservations.Query.Users.Dao
 {
     public interface IUserDao
     {
-        Task<List<Model.Models.User>> GetUsersAsync();
+        Task<List<User>> GetUsersAsync();
+        Task<User> GetUsersByIdAsync(Guid id);
     }
 }
