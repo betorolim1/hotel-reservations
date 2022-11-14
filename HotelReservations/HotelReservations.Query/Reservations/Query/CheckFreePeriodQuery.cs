@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotelReservations.Query.Reservation.Query
+namespace HotelReservations.Query.Reservations.Query
 {
     public class CheckFreePeriodQuery
     {

@@ -1,5 +1,5 @@
 ﻿using HotelReservations.Query.Handlers.Interfaces;
-using HotelReservations.Query.Reservation.Query;
+using HotelReservations.Query.Reservations.Query;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

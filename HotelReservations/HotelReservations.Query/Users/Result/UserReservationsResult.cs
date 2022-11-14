@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotelReservations.Query.User.Result
+namespace HotelReservations.Query.Users.Result
 {
     public class UserReservationsResult
     {

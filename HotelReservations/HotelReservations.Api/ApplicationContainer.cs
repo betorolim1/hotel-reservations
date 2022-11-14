@@ -3,7 +3,7 @@ using HotelReservations.Core.Handlers.Interfaces;
 using HotelReservations.Data.Dao;
 using HotelReservations.Query.Handlers;
 using HotelReservations.Query.Handlers.Interfaces;
-using HotelReservations.Query.User.Dao;
+using HotelReservations.Query.Users.Dao;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HotelReservations.Api

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HotelReservations.Query.User.Dao
+namespace HotelReservations.Query.Users.Dao
 {
     public interface IUserDao
     {

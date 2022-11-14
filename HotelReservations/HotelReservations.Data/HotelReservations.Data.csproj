@@ -9,10 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\HotelReservations.Core\HotelReservations.Core.csproj" />
     <ProjectReference Include="..\HotelReservations.Model\HotelReservations.Model.csproj" />
     <ProjectReference Include="..\HotelReservations.Query\HotelReservations.Query.csproj" />
   </ItemGroup>

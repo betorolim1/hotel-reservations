@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotelReservations.Query.Reservation.Result
+namespace HotelReservations.Query.Reservations.Result
 {
     public class FreePeriodResult
     {

@@ -1,6 +1,6 @@
 ﻿using HotelReservations.Query.Handlers.Interfaces;
-using HotelReservations.Query.Reservation.Query;
-using HotelReservations.Query.Reservation.Result;
+using HotelReservations.Query.Reservations.Query;
+using HotelReservations.Query.Reservations.Result;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

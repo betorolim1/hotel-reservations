@@ -1,5 +1,5 @@
-﻿using HotelReservations.Query.Reservation.Result;
-using HotelReservations.Query.User.Result;
+﻿using HotelReservations.Query.Reservations.Result;
+using HotelReservations.Query.Users.Result;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

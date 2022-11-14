@@ -1,10 +1,12 @@
 using HotelReservations.Data.Context;
+using HotelReservations.Model.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace HotelReservations.Api
 {
@@ -50,6 +52,31 @@ namespace HotelReservations.Api
             {
                 endpoints.MapControllers();
             });
+
+
+            //Insert Fake Data
+
+            var scope = app.ApplicationServices.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            InsertFakeData(context);
+        }
+
+        private static void InsertFakeData(DatabaseContext context)
+        {
+            try
+            {
+                var user = new User
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "User for testing"
+                };
+
+                context.Add(user);
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

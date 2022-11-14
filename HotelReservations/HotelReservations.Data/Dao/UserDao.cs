@@ -1,6 +1,6 @@
 ﻿using HotelReservations.Data.Context;
 using HotelReservations.Model.Models;
-using HotelReservations.Query.User.Dao;
+using HotelReservations.Query.Users.Dao;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
