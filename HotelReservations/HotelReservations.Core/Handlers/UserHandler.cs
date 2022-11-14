@@ -36,7 +36,7 @@ namespace HotelReservations.Core.Handlers
 
             var user = await _userRepository.GetUserAsync(reservation.UserId);
 
-            if(user is null)
+            if (user is null)
             {
                 AddNotification("User does not exist");
                 return Guid.Empty;
