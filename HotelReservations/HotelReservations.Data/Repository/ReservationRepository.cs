@@ -38,9 +38,32 @@ namespace HotelReservations.Data.Repository
             return reservationId;
         }
 
-        public async Task<bool> IsFreePeriodAsync(DateTime startDate, DateTime endDate)
+        public async Task<Reservation> GetReservationByIdAsync(Guid id)
         {
-            return await _databaseContext.Reservations.Where(x => x.StartDate.Date <= endDate.Date && startDate.Date <= x.EndDate.Date ).FirstOrDefaultAsync() == null;
+            return await _databaseContext.Reservations.Where(x => x.Id == id).SingleOrDefaultAsync();
+        }
+
+        public async Task<bool> IsFreePeriodAsync(DateTime startDate, DateTime endDate, Guid excludeReservationId = new Guid())
+        {
+            var query = _databaseContext.Reservations.Where(x => x.StartDate.Date <= endDate.Date && startDate.Date <= x.EndDate.Date);
+
+            if (excludeReservationId != Guid.Empty)
+                query = query.Where(x => !x.Id.Equals(excludeReservationId));
+
+            var teste =  await query.FirstOrDefaultAsync();
+
+            return teste == null;
+        }
+
+        public async Task UpdateReservationAsync(ReservationDomain reservationNew, Reservation reservationOld)
+        {
+            reservationOld.Observation = reservationNew.Observation;
+            reservationOld.StartDate = reservationNew.StartDate;
+            reservationOld.EndDate = reservationNew.EndDate;
+            reservationOld.UpdateAt = DateTime.Now;
+
+            _databaseContext.Update(reservationOld);
+            await _databaseContext.SaveChangesAsync();
         }
     }
 }

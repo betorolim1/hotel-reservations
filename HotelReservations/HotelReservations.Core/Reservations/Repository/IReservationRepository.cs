@@ -7,7 +7,9 @@ namespace HotelReservations.Core.Reservations.Repository
 {
     public interface IReservationRepository
     {
-        Task<bool> IsFreePeriodAsync(DateTime startDate, DateTime endDate);
+        Task<bool> IsFreePeriodAsync(DateTime startDate, DateTime endDate, Guid excludeReservationId = new Guid());
         Task<Guid> CreateReservationAsync(ReservationDomain reservation, User user);
+        Task<Reservation> GetReservationByIdAsync(Guid id);
+        Task UpdateReservationAsync(ReservationDomain reservationNew, Reservation reservationOld);
     }
 }

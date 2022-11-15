@@ -19,7 +19,7 @@ namespace HotelReservations.Data.Repository
 
         public async Task<User> GetUserAsync(Guid id)
         {
-            return await _databaseContext.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _databaseContext.Users.Where(x => x.Id == id).SingleOrDefaultAsync();
         }
     }
 }

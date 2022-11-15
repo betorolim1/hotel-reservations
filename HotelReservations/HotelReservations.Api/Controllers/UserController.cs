@@ -39,7 +39,7 @@ namespace HotelReservations.Api.Controllers
         }
 
         [HttpPut("{userId}/reservations/{reservationId}")]
-        public async Task<IActionResult> UpdateReservationAsync([FromQuery] Guid userId, [FromQuery] Guid reservationId, [FromBody] UpdateReservationCommand command)
+        public async Task<IActionResult> UpdateReservationAsync(Guid userId, Guid reservationId, [FromBody] UpdateReservationCommand command)
         {
             if (command is null)
                 return BadRequest("Command can not be null");
@@ -48,6 +48,9 @@ namespace HotelReservations.Api.Controllers
             command.UserId = userId;
 
             await _userHandler.UpdateReservationAsync(command);
+
+            if (!_userHandler.IsValid)
+                return BadRequest(_userHandler.Notifications);
 
             return NoContent();
         }
@@ -69,7 +72,7 @@ namespace HotelReservations.Api.Controllers
         }
 
         [HttpDelete("{userId}/reservations/{reservationId}")]
-        public async Task<IActionResult> CancelReservationAsync([FromQuery] Guid userId, [FromQuery] Guid reservationId)
+        public async Task<IActionResult> CancelReservationAsync(Guid userId, Guid reservationId)
         {
             var command = new CancelReservationCommand
             {
