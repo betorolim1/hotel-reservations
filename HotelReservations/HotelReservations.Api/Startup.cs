@@ -1,3 +1,4 @@
+using HotelReservations.Api.Middlewares;
 using HotelReservations.Data.Context;
 using HotelReservations.Model.Models;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,8 @@ namespace HotelReservations.Api
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseMiddleware<ExceptionMiddleware>(env);
 
             app.UseEndpoints(endpoints =>
             {

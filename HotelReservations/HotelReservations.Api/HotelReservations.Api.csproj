@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HotelReservations.Core\HotelReservations.Core.csproj" />
     <ProjectReference Include="..\HotelReservations.Data\HotelReservations.Data.csproj" />
     <ProjectReference Include="..\HotelReservations.Query\HotelReservations.Query.csproj" />
