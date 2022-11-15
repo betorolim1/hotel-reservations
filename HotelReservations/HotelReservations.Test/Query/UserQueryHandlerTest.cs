@@ -2,7 +2,6 @@
 using HotelReservations.Model.Models;
 using HotelReservations.Query.Handlers;
 using HotelReservations.Query.Reservations.Dao;
-using HotelReservations.Query.Reservations.Query;
 using HotelReservations.Query.Users.Dao;
 using HotelReservations.Test.Extensions;
 using Moq;
