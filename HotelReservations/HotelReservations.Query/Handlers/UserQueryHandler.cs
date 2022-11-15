@@ -24,9 +24,9 @@ namespace HotelReservations.Query.Handlers
 
         public async Task<List<UserReservationsResult>> GetUserReservationsAsync(Guid userId)
         {
-            var user = await _userDao.GetUsersByIdAsync(userId);
+            var doesUserExist = await _userDao.DoesUserExistAsync(userId);
 
-            if (user is null)
+            if (!doesUserExist)
             {
                 AddNotification("User does not exist");
                 return null;

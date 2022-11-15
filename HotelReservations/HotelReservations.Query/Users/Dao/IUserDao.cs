@@ -8,6 +8,6 @@ namespace HotelReservations.Query.Users.Dao
     public interface IUserDao
     {
         Task<List<User>> GetUsersAsync();
-        Task<User> GetUsersByIdAsync(Guid id);
+        Task<bool> DoesUserExistAsync(Guid id);
     }
 }

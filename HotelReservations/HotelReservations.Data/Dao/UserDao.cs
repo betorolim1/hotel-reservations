@@ -23,9 +23,9 @@ namespace HotelReservations.Data.Dao
             return await _databaseContext.Users.ToListAsync();
         }
 
-        public async Task<User> GetUsersByIdAsync(Guid id)
+        public async Task<bool> DoesUserExistAsync(Guid id)
         {
-            return await _databaseContext.Users.Where(x => x.Id == id).SingleOrDefaultAsync();
+            return await _databaseContext.Users.Where(x => x.Id == id).SingleOrDefaultAsync() != null;
         }
     }
 }
