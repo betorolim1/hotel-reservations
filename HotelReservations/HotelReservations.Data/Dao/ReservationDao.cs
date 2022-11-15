@@ -22,5 +22,10 @@ namespace HotelReservations.Data.Dao
         {
             return await _databaseContext.Reservations.Where(x => x.UserId == userId).ToListAsync();
         }
+
+        public async Task<List<Reservation>> GetReservationsInPeriodAsync(DateTime startDate, DateTime endDate)
+        {
+            return await _databaseContext.Reservations.Where(x => x.StartDate.Date <= endDate.Date && startDate.Date <= x.EndDate.Date).OrderBy(x => x.StartDate).ToListAsync();
+        }
     }
 }

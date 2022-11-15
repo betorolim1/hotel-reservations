@@ -15,10 +15,13 @@ namespace HotelReservations.Api.Controllers
             _reservationQueryHandler = reservationQueryHandler;
         }
 
-        [HttpGet("free-period")]
-        public async Task<IActionResult> CheckFreePeriodAsync([FromQuery] CheckFreePeriodQuery query)
+        [HttpGet("in-period")]
+        public async Task<IActionResult> GetReservationsInPeriodAsync([FromBody] CheckFreePeriodQuery query)
         {
-            var result = await _reservationQueryHandler.CheckFreePeriodAsync(query);
+            var result = await _reservationQueryHandler.GetReservationsInPeriodAsync(query);
+
+            if (!_reservationQueryHandler.IsValid)
+                return BadRequest(_reservationQueryHandler.Notifications);
 
             return Ok(result);
         }

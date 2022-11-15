@@ -21,9 +21,26 @@ namespace HotelReservations.Core.Handlers
             _userRepository = userRepository;
         }
 
-        public Task CancelReservationAsync(CancelReservationCommand command)
+        public async Task CancelReservationAsync(CancelReservationCommand command)
         {
-            throw new NotImplementedException();
+            var reservation = GetReservationByCommand(command);
+
+            AddNotifications(reservation.Notifications);
+
+            if (!IsValid)
+                return;
+
+            await GetAndValidateUserAsync(command.UserId);
+
+            if (!IsValid)
+                return;
+
+            var reservationDb = await GetAndValidateReservationAsync(command.ReservationId);
+
+            if (!IsValid)
+                return;
+
+            await _reservationRepository.CancelReservationAsync(reservationDb);
         }
 
         public async Task<Guid> CreateReservationAsync(CreateReservationCommand command)
@@ -64,13 +81,10 @@ namespace HotelReservations.Core.Handlers
             if (!IsValid)
                 return;
 
-            var reservationOld = await _reservationRepository.GetReservationByIdAsync(reservationNew.Id);
+            var reservationOld = await GetAndValidateReservationAsync(reservationNew.Id);
 
-            if (reservationOld is null)
-            {
-                AddNotification("Reservation does not exist");
+            if (!IsValid)
                 return;
-            }
 
             await ValidateFreePeriodAsync(reservationNew);
 
@@ -93,6 +107,19 @@ namespace HotelReservations.Core.Handlers
             return user;
         }
 
+        private async Task<Reservation> GetAndValidateReservationAsync(Guid reservationId)
+        {
+            var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId);
+
+            if (reservation is null)
+            {
+                AddNotification("Reservation does not exist");
+                return null;
+            }
+
+            return reservation;
+        }
+
         private async Task ValidateFreePeriodAsync(ReservationDomain reservation)
         {
             var isFreePeriod = await _reservationRepository.IsFreePeriodAsync(reservation.StartDate, reservation.EndDate, reservation.Id);
@@ -106,5 +133,8 @@ namespace HotelReservations.Core.Handlers
 
         private ReservationDomain GetReservationByCommand(UpdateReservationCommand command)
             => ReservationDomain.Factory.CreateReservationToUpdate(command.ReservationId, command.UserId, command.StartDate, command.EndDate, command.Observation);
+
+        private ReservationDomain GetReservationByCommand(CancelReservationCommand command)
+            => ReservationDomain.Factory.CreateReservationToDelete(command.ReservationId, command.UserId);
     }
 }

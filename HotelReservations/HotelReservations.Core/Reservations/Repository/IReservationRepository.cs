@@ -11,5 +11,6 @@ namespace HotelReservations.Core.Reservations.Repository
         Task<Guid> CreateReservationAsync(ReservationDomain reservation, User user);
         Task<Reservation> GetReservationByIdAsync(Guid id);
         Task UpdateReservationAsync(ReservationDomain reservationNew, Reservation reservationOld);
+        Task CancelReservationAsync(Reservation reservation);
     }
 }

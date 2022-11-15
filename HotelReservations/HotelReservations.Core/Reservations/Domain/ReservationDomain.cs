@@ -29,6 +29,15 @@ namespace HotelReservations.Core.Reservations.Domain
             ValidateMainFields();
         }
 
+        private ReservationDomain(Guid id, Guid userId)
+        {
+            Id = id;
+            UserId = userId;
+
+            ValidateId();
+            ValidateUserId();
+        }
+
         public Guid Id { get; set; }
 
         public Guid UserId { get; set; }
@@ -45,10 +54,15 @@ namespace HotelReservations.Core.Reservations.Domain
                 AddNotification("Invalid ReservationId");
         }
 
-        private void ValidateMainFields()
+        private void ValidateUserId()
         {
             if (UserId == Guid.Empty)
                 AddNotification("Invalid UserId");
+        }
+
+        private void ValidateMainFields()
+        {
+            ValidateUserId();
 
             if (StartDate.Date < DateTime.Now.Date)
                 AddNotification("Invalid StartDate");
@@ -90,6 +104,9 @@ namespace HotelReservations.Core.Reservations.Domain
             
             public static ReservationDomain CreateReservationToUpdate(Guid id, Guid userId, DateTime startDate, DateTime endDate, string observation)
                 => new ReservationDomain(id, userId, startDate, endDate, observation);
+            
+            public static ReservationDomain CreateReservationToDelete(Guid id, Guid userId)
+                => new ReservationDomain(id, userId);
         }
     }
 }

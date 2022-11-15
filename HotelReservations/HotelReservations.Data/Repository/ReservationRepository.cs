@@ -18,6 +18,12 @@ namespace HotelReservations.Data.Repository
             _databaseContext = databaseContext;
         }
 
+        public async Task CancelReservationAsync(Reservation reservation)
+        {
+            _databaseContext.Remove(reservation);
+            await _databaseContext.SaveChangesAsync();
+        }
+
         public async Task<Guid> CreateReservationAsync(ReservationDomain reservation, User user)
         {
             var reservationId = Guid.NewGuid();

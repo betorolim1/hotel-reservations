@@ -82,7 +82,10 @@ namespace HotelReservations.Api.Controllers
 
             await _userHandler.CancelReservationAsync(command);
 
-            return Ok();
+            if (!_userHandler.IsValid)
+                return BadRequest(_userHandler.Notifications);
+
+            return NoContent();
         }
     }
 }
