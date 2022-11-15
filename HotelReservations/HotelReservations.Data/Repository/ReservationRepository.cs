@@ -1,6 +1,7 @@
 ﻿using HotelReservations.Core.Reservations.Domain;
 using HotelReservations.Core.Reservations.Repository;
 using HotelReservations.Data.Context;
+using HotelReservations.Data.Repository.Base;
 using HotelReservations.Model.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,19 +10,15 @@ using System.Threading.Tasks;
 
 namespace HotelReservations.Data.Repository
 {
-    public class ReservationRepository : IReservationRepository
+    public class ReservationRepository : RepositoryBase<Reservation>, IReservationRepository
     {
-        private readonly DatabaseContext _databaseContext;
-
-        public ReservationRepository(DatabaseContext databaseContext)
+        public ReservationRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
-            _databaseContext = databaseContext;
         }
 
         public async Task CancelReservationAsync(Reservation reservation)
         {
-            _databaseContext.Remove(reservation);
-            await _databaseContext.SaveChangesAsync();
+            await RemoveAsync(reservation);
         }
 
         public async Task<Guid> CreateReservationAsync(ReservationDomain reservation, User user)
@@ -38,25 +35,24 @@ namespace HotelReservations.Data.Repository
                 UserId = user.Id
             };
 
-            await _databaseContext.AddAsync(reservationToInsert);
-            await _databaseContext.SaveChangesAsync();
+            await AddAsync(reservationToInsert);
 
             return reservationId;
         }
 
         public async Task<Reservation> GetReservationByIdAsync(Guid id)
         {
-            return await _databaseContext.Reservations.Where(x => x.Id == id).SingleOrDefaultAsync();
+            return await databaseContext.Reservations.Where(x => x.Id == id).SingleOrDefaultAsync();
         }
 
         public async Task<bool> IsFreePeriodAsync(DateTime startDate, DateTime endDate, Guid excludeReservationId = new Guid())
         {
-            var query = _databaseContext.Reservations.Where(x => x.StartDate.Date <= endDate.Date && startDate.Date <= x.EndDate.Date);
+            var query = databaseContext.Reservations.Where(x => x.StartDate.Date <= endDate.Date && startDate.Date <= x.EndDate.Date);
 
             if (excludeReservationId != Guid.Empty)
                 query = query.Where(x => !x.Id.Equals(excludeReservationId));
 
-            var teste =  await query.FirstOrDefaultAsync();
+            var teste = await query.FirstOrDefaultAsync();
 
             return teste == null;
         }
@@ -68,8 +64,7 @@ namespace HotelReservations.Data.Repository
             reservationOld.EndDate = reservationNew.EndDate;
             reservationOld.UpdateAt = DateTime.Now;
 
-            _databaseContext.Update(reservationOld);
-            await _databaseContext.SaveChangesAsync();
+            await UpdateAsync(reservationOld);
         }
     }
 }
