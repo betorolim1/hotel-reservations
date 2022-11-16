@@ -21,6 +21,14 @@ namespace HotelReservations.Api
             AddDaos(service);
             AddRepositories(service);
         }
+        
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new  Microsoft.OpenApi.Models.OpenApiInfo { Title = "HotelReservation", Version = "v1" });
+            });
+        }
 
         private static void AddRepositories(IServiceCollection services)
         {

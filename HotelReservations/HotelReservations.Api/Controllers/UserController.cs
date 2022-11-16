@@ -19,6 +19,10 @@ namespace HotelReservations.Api.Controllers
             _userHandler = userHandler;
         }
 
+        /// <summary>
+        /// Retrieves all users on database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetUsersAsync()
         {
@@ -27,6 +31,11 @@ namespace HotelReservations.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Retrieves all the user reservations.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpGet("{userId}/reservations")]
         public async Task<IActionResult> GetUserReservationsAsync(Guid userId)
         {
@@ -38,6 +47,13 @@ namespace HotelReservations.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Updates the user reservation.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="reservationId"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPut("{userId}/reservations/{reservationId}")]
         public async Task<IActionResult> UpdateReservationAsync(Guid userId, Guid reservationId, [FromBody] UpdateReservationCommand command)
         {
@@ -55,6 +71,12 @@ namespace HotelReservations.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Creates an user reservation.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("{userId}/reservations")]
         public async Task<IActionResult> CreateReservationAsync(Guid userId, [FromBody] CreateReservationCommand command)
         {
@@ -71,6 +93,12 @@ namespace HotelReservations.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Cancels the user reservation.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="reservationId"></param>
+        /// <returns></returns>
         [HttpDelete("{userId}/reservations/{reservationId}")]
         public async Task<IActionResult> CancelReservationAsync(Guid userId, Guid reservationId)
         {

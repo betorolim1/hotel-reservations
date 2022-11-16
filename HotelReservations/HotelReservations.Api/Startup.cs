@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 
 namespace HotelReservations.Api
@@ -27,6 +28,8 @@ namespace HotelReservations.Api
 
             services.ConfigureDIs();
 
+            services.ConfigureSwagger();
+
             services.AddMvc();
         }
 
@@ -43,6 +46,14 @@ namespace HotelReservations.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("v1/swagger.json", "HotelReservation API v1");
+                options.DocExpansion(DocExpansion.None);
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
