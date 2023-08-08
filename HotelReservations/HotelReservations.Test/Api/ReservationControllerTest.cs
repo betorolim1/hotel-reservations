@@ -5,6 +5,7 @@ using HotelReservations.Query.Reservations.Query;
 using HotelReservations.Query.Reservations.Result;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -27,16 +28,20 @@ namespace HotelReservations.Test.Api
         [Fact]
         public async Task GetReservationsInPeriodAsync_Should_Return_BadRequest_When_Handler_Contains_Notifications()
         {
-            var query = _fixture.Create<CheckFreePeriodQuery>();
+            var startSearchDate = DateTime.Now;
+            var endSearchDate = DateTime.Now.AddDays(2);
 
             var notifications = _fixture.CreateMany<string>().ToList();
 
-            _reservationQueryHandler.Setup(x => x.GetReservationsInPeriodAsync(query));
+            _reservationQueryHandler.Setup(x => x.GetReservationsInPeriodAsync(It.Is<CheckFreePeriodQuery>(x => 
+                x.StartSearchDate == startSearchDate && 
+                x.EndSearchDate == endSearchDate
+            )));
 
             _reservationQueryHandler.Setup(x => x.IsValid).Returns(false);
             _reservationQueryHandler.Setup(x => x.Notifications).Returns(notifications);
 
-            var result = await _controller.GetReservationsInPeriodAsync(query) as BadRequestObjectResult;
+            var result = await _controller.GetReservationsInPeriodAsync(startSearchDate, endSearchDate) as BadRequestObjectResult;
 
             Assert.NotNull(result);
             Assert.Equal(notifications, result.Value);
@@ -47,15 +52,20 @@ namespace HotelReservations.Test.Api
         [Fact]
         public async Task GetReservationsInPeriodAsync_Should_Return_OkResult()
         {
-            var query = _fixture.Create<CheckFreePeriodQuery>();
+            var startSearchDate = DateTime.Now;
+            var endSearchDate = DateTime.Now.AddDays(2);
 
             var reservationResult = _fixture.CreateMany<ReservationInPeriodResult>().ToList();
 
-            _reservationQueryHandler.Setup(x => x.GetReservationsInPeriodAsync(query)).ReturnsAsync(reservationResult);
+            _reservationQueryHandler.Setup(x => x.GetReservationsInPeriodAsync(It.Is<CheckFreePeriodQuery>(x =>
+                x.StartSearchDate == startSearchDate &&
+                x.EndSearchDate == endSearchDate
+            )))
+                .ReturnsAsync(reservationResult);
 
             _reservationQueryHandler.Setup(x => x.IsValid).Returns(true);
 
-            var result = await _controller.GetReservationsInPeriodAsync(query) as OkObjectResult;
+            var result = await _controller.GetReservationsInPeriodAsync(startSearchDate, endSearchDate) as OkObjectResult;
 
             Assert.NotNull(result);
             Assert.Equal(reservationResult, result.Value);
